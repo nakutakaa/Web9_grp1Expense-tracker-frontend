@@ -1,13 +1,13 @@
+// src/App.jsx
 /**
  * @file App.jsx
  * @description Our main application component, handling global dark mode, routing,
  * and protected routes for secure access.
  * @author Your Name <your.email@example.com>
- * @date June 24, 2025
+ * @date June 25, 2025
  */
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom'; // No longer need 'Navigate' directly here
-import Navbar from './components/Layout/Navbar';
+import { Routes, Route } from 'react-router-dom';
 
 // Our page components
 import LoginPage from './pages/Auth/LoginPage';
@@ -15,8 +15,9 @@ import RegisterPage from './pages/Auth/RegisterPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-// Our custom components
+// Our custom components and layouts
 import ProtectedRoute from './components/ProtectedRoute'; // Importing our ProtectedRoute
+import DashboardLayout from './layouts/DashboardLayout'; // Importing our DashboardLayout
 
 function App() {
   // We ensure the 'dark' class is applied to the html element for our dark theme
@@ -30,31 +31,33 @@ function App() {
   return (
     // Our main routing structure for the application.
     // We define which components render for which URL paths.
+    // We removed the <div className="App"> wrapper here as the DashboardLayout
+    // already provides the full page structure including min-h-screen.
+    <Routes>
+      {/* Public Routes: These routes are accessible to all users,
+          even if they are not logged in. */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
-    <div className="App">
-      <Navbar/>
-      <Routes>
-        {/* Public Routes: These routes are accessible to all users,
-      even if they are not logged in. */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-
-        {/* Protected Routes: All routes nested within this `Route` element
-      will be guarded by our `ProtectedRoute` component.
-      This means a user must be authenticated to access any of these paths. */}
-        <Route element={<ProtectedRoute />}>
-          {/* Our main dashboard page - now protected.
-        Users will be redirected to login if not authenticated. */}
+      {/* Protected Routes: All routes nested within this `Route` element
+          will be guarded by our `ProtectedRoute` component.
+          This means a user must be authenticated to access any of these paths.
+          The `DashboardLayout` now wraps these protected routes, providing
+          a consistent header, navigation, and logout functionality. */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<DashboardLayout />}> {/* Nested DashboardLayout */}
+          {/* Our main dashboard page - now protected and within the common layout */}
           <Route path="/" element={<DashboardPage />} />
-          {/* We will add more protected routes here later, such as
-        /expenses, /expenses/add, /expenses/edit/:id, /budgets, etc. */}
+          {/* Future: We'll add more protected routes here later (e.g., /expenses, /budgets) */}
+          <Route path="/expenses" element={<div>Expenses List Page (Coming Soon)</div>} />
+          <Route path="/budgets" element={<div>Budgets Page (Coming Soon)</div>} />
         </Route>
+      </Route>
 
-        {/* Catch-all Route: This route acts as a fallback.
-      If no other route matches the URL, our NotFoundPage will be displayed. */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </div>
+      {/* Catch-all Route: This route acts as a fallback.
+          If no other route matches the URL, our NotFoundPage will be displayed. */}
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 

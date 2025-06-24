@@ -3,7 +3,6 @@
  * @file App.jsx
  * @description Our main application component, handling global dark mode, routing,
  * and protected routes for secure access.
- * @author Your Name <your.email@example.com>
  * @date June 25, 2025
  */
 import React, { useEffect } from 'react';

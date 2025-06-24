@@ -12,7 +12,8 @@ import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import NotFoundPage from './pages/NotFoundPage';
-import ExpenseListPage from './pages/Expenses/ExpenseListPage'; 
+import ExpenseListPage from './pages/Expenses/ExpenseListPage';
+import BudgetPage from './pages/Budgets/BudgetPage'; 
 
 // Our custom components and layouts
 import ProtectedRoute from './components/ProtectedRoute'; // Importing our ProtectedRoute
@@ -50,7 +51,7 @@ function App() {
           {/* NEW: Our Expense List Page route */}
           <Route path="/expenses" element={<ExpenseListPage />} />
           {/* Future: We'll add more protected routes here later (e.g., /expenses/add, /budgets) */}
-          <Route path="/budgets" element={<div>Budgets Page (Coming Soon)</div>} />
+          <Route path="/budgets" element={<BudgetPage />} />
         </Route>
       </Route>
 

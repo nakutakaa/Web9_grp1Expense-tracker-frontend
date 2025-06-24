@@ -24,7 +24,7 @@ const DashboardLayout = () => {
         <nav className="container mx-auto flex justify-between items-center">
           {/* Our application logo/title */}
           <NavLink to="/" className="text-2xl font-bold text-accent hover:text-accent-light transition-colors">
-            Our Expense Tracker
+            Expense Tracker
           </NavLink>
 
           {/* Our main navigation links */}

@@ -1,43 +1,42 @@
-import React, { useState, useEffect } from 'react'; // Added useEffect for initial dark mode
+// src/pages/Auth/LoginPage.jsx
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify'; // Import toast
-import api from '../../services/api'; // Import our configured Axios instance
+import { toast } from 'react-toastify';
+import api from '../../services/api';
+import { useAuth } from '../../context/AuthContext'; // Import useAuth
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // To manage button loading state
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth(); // Destructure login function from useAuth context
 
-  // Ensure dark mode is applied if not already by the root App.jsx or main.jsx
+  // Ensure dark mode is applied
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Disable button and show loading
-
-    // Placeholder for actual API call
-    // In a real scenario, we'd send username/password to our backend
-    console.log('Attempting login with:', { username, password });
+    setLoading(true);
 
     try {
-      // Simulate an API call delay
-      // In a real app: const response = await api.post('/auth/login', { username, password });
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network request
+      // --- Actual Backend Call ---
+      // This is where we'll make the real API call to your Flask backend
+      // The backend should return an access_token and possibly user info
+      const response = await api.post('/auth/login', { username, password });
+      // Assuming our backend responds with { access_token: '...', user: { username: '...' } }
+      const { access_token, user: loggedInUser } = response.data; // Adjust based on our actual backend response structure
 
-      // Simulate successful login (replace with actual backend response handling)
-      toast.success('Simulated Login Successful! You will be redirected soon.');
-      // console.log('Login API response:', response.data);
-      // TODO: Store token and user info, then redirect to dashboard
-      // Example: localStorage.setItem('token', response.data.access_token);
-      // navigate('/');
+      // Call the login function from the AuthContext to update global state and store token
+      login(access_token, loggedInUser);
+      // The navigate('/') is already handled within the login function in AuthContext
+
     } catch (error) {
-      console.error('Simulated Login error:', error);
-      // Display error message from backend or a generic one
-      toast.error(error.response?.data?.message || 'Simulated Login Failed. Try again.');
+      console.error('Login error:', error.response?.data || error.message);
+      toast.error(error.response?.data?.message || 'Login failed. Please check your credentials.');
     } finally {
-      setLoading(false); // Re-enable button
+      setLoading(false);
     }
   };
 
@@ -74,7 +73,7 @@ function LoginPage() {
         <button
           type="submit"
           className="bg-accent hover:opacity-90 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full disabled:opacity-50"
-          disabled={loading} // Disable button when loading
+          disabled={loading}
         >
           {loading ? 'Logging in...' : 'Login'}
         </button>

@@ -1,6 +1,6 @@
 # Expense Tracker Frontend
 
-This repository contains the frontend application for our Full-Stack Expense Tracker project. It's built with React and Vite, styled using Tailwind CSS, and designed for seamless integration with our Python/Flask backend.KINDLY FEEL FREE TO MAKE NEEDED CORRECTIONS AND SUGGESTION COZ ITS GOOD FOR ALL OF US
+This repository contains the frontend application for our Full-Stack Expense Tracker project. It's built with React and Vite, styled using Tailwind CSS, and designed for seamless integration with our Python/Flask backend.(NOTE:some section/functionalities might completely relay to what will be available in the backend,so it might be speculative for now,feel free to shere your thoughts)
 
 ---
 
@@ -12,13 +12,13 @@ This frontend is designed to be fully functional and testable independently befo
 
 ### Key Features (Frontend Focus)
 
-* **Authentication:** User registration and login.
-* **Expense Management:** Adding, viewing, editing, and deleting expenses.
-* **Categorization:** Basic manual categorization of expenses.
-* **Recurring Expenses:** Marking expenses as recurring.
-* **Budgeting:** Setting and viewing simple monthly budgets per category.
-* **Dashboard:** Summary of spending (total, by category).
-* **Modern UI:** Dark theme , clean design, and responsive layouts.
+* **Authentication:** User registration and login. [✓ Frontend UI done, integrated with basic backend endpoints]
+* **Expense Management:** Adding, viewing, editing, and deleting expenses. [Partially Done: Viewing list UI is complete with dummy data]
+* **Categorization:** Basic manual categorization of expenses. [Placeholder in Expense and Budget views]
+* **Recurring Expenses:** Marking expenses as recurring. [Placeholder in Expense views]
+* **Budgeting:** Setting and viewing simple monthly budgets per category. [✓ Frontend UI done with dummy data]
+* **Dashboard:** Summary of spending (total, by category). [✓ Frontend UI done with dummy data and charts]
+* **Modern UI:** Dark theme, clean design, and responsive layouts. [✓ Implemented]
 
 ### Integration & Workflow
 
@@ -51,15 +51,16 @@ Follow these steps to set up and run the frontend application locally.
     ```bash
     npm install
     ```
+3.  **Install Charting Libraries:**
+    ```bash
+    npm install chart.js react-chartjs-2
+    ```
 
 ### Configuration
 
 1.  **Environment Variables:**
     Create a file named `.env` in the root of the `expense-tracker-frontend` directory.
     Add the following line, ensuring the `VITE_API_BASE_URL` matches the base URL of our Flask backend API.
-
-    ```dotenv
-    VITE_API_BASE_URL=http://localhost:5000/api
     ```
     * **Note:** During local development, Vite is configured with a proxy in `vite.config.js` so that requests to `/api` from the frontend will be automatically redirected to `http://localhost:5000`. This environment variable is primarily used when the proxy isn't active or for production builds.
 
@@ -79,6 +80,7 @@ Frontend Technologies Used
     Tailwind CSS: Utility-first CSS framework for rapid styling.
     Axios: Promise-based HTTP client for the browser and Node.js.
     React Toastify: For elegant notifications.
+    Chart.js & React-Chartjs-2: For creating interactive data visualizations (charts).
 
 Folder Structure
 
@@ -86,18 +88,25 @@ expense-tracker-frontend/
 ├── public/                     # Static assets (e.g., favicon)
 ├── src/
 │   ├── assets/                 # Images, icons, fonts (future)
-│   ├── components/             # Reusable UI components (e.g., Spinner, ProtectedRoute)
+│   ├── components/             # Reusable UI components
+│   │   ├── Charts/             # Chart components
+│   │   │   └── CategorySpendingBarChart.jsx
 │   │   ├── ProtectedRoute.jsx
 │   │   └── Spinner.jsx
 │   ├── context/                # React Context for global state management
 │   │   └── AuthContext.jsx     # Manages user authentication state
-│   ├── layouts/                # Layout components (future: DashboardLayout, AuthLayout)
+│   ├── layouts/                # Layout components
+│   │   └── DashboardLayout.jsx # Layout for protected routes
 │   ├── pages/                  # Top-level components representing distinct views/pages
 │   │   ├── Auth/
 │   │   │   ├── LoginPage.jsx   # User login form
 │   │   │   └── RegisterPage.jsx# User registration form
+│   │   ├── Budgets/
+│   │   │   └── BudgetPage.jsx  # Budget management page
 │   │   ├── Dashboard/
 │   │   │   └── DashboardPage.jsx # Main dashboard view
+│   │   ├── Expenses/
+│   │   │   └── ExpenseListPage.jsx # List of expenses
 │   │   └── NotFoundPage.jsx    # 404 error page
 │   ├── services/               # API interaction logic
 │   │   └── api.js              # Configured Axios instance for backend calls
@@ -114,8 +123,6 @@ expense-tracker-frontend/
 Code Quality & Collaboration
 
 We maintain a clean and commented codebase to facilitate collaborative development.
-
-
 We follow a Conventional Commits specification for clear and structured commit history (e.g., feat: Add new feature, fix: Resolve bug).
 Testing
 
@@ -123,40 +130,40 @@ Testing
     Integration Tests: (To be implemented)
     End-to-End Tests: (To be implemented using Cypress/Playwright)
 
-### Future Development
-## Frontend Remaining Tasks
+Future Development
 
-Here's what's left to build out on the frontend side:[we'll eliminate each as we proceed]
+Frontend Remaining Tasks
+
+Here's what's left to build out on the frontend side:
 
     Dashboard UI Enhancements:
-        Develop a comprehensive DashboardLayout for consistent navigation (header, sidebar) and a ThemeSwitcher component.
-        Flesh out the DashboardPage with sections for total spending, spending by category, and quick action links.
+        [✓] Develop a comprehensive DashboardLayout for consistent navigation (header, sidebar).
+        [✓] Flesh out the DashboardPage with sections for total spending, spending by category, and quick action links.
     Expense Management (CRUD - Create, Read, Update, Delete):
-        Create detailed ExpenseListPage with tables or cards to display expenses, including search and filter capabilities.
-        Develop forms for AddExpensePage and EditExpensePage to capture expense details (description, amount, category, date, recurring status, recurrence frequency).
-        Implement logic to interact with the backend API endpoints for all CRUD operations on expenses.
+        [✓] Create detailed ExpenseListPage with tables or cards to display expenses. (Search and filter capabilities still needed).
+        [ ] Develop forms for AddExpensePage and EditExpensePage to capture expense details (description, amount, category, date, recurring status, recurrence frequency).
+        [ ] Implement logic to interact with the backend API endpoints for all CRUD operations on expenses.
     Budgeting Implementation:
-        Build the BudgetPage interface for users to set monthly budgets for specific categories.
-        Implement visual indicators (e.g., progress bars, color-coded alerts) to show budget utilization.
-        Integrate with backend budget alerts (displaying in-app notifications).
+        [✓] Build the BudgetPage interface for users to set monthly budgets for specific categories.
+        [✓] Implement visual indicators (e.g., progress bars, color-coded alerts) to show budget utilization.
+        [ ] Integrate with backend budget alerts (displaying in-app notifications).
     Interactive Spending Visualizations:
-        Integrate a suitable charting library (e.g., Recharts, React-Chartjs-2) to display spending data.
-        Develop various chart types: spending over time, by category (pie/bar charts), and potentially more advanced visualizations like heatmaps or bubble charts.
+        [✓] Integrate a suitable charting library (Chart.js via React-Chartjs-2).
+        [✓] Develop various chart types: (currently, a bar chart for spending by category is implemented).
     Receipt/Image Integration:
-        Design the UI for uploading receipt photos.
-        Implement file upload logic to send images to the backend.
-        Display extracted expense details from processed receipts (if the backend supports OCR).
+        [ ] Design the UI for uploading receipt photos.(if it'll be included)
+        [ ] Implement file upload logic to send images to the backend.
+        [ ] Display extracted expense details from processed receipts (if the backend will include).
     User Experience Refinements:
-        Implement robust form validations and clearer error messages for all user inputs.
-        Add confirmation modals for destructive actions (e.g., deleting an expense).
-        Ensure full responsiveness across different device sizes.
+        [ ] Implement robust form validations and clearer error messages for all user inputs.
+        [ ] Add confirmation modals for destructive actions (e.g., deleting an expense).
 
 Backend Remaining Tasks (for the Backend-side members)
 
 This section outlines the primary tasks for the Python/Flask backend:
 
     Core API Endpoints:
-        User Authentication: Implement POST /auth/register (user registration), POST /auth/login (user login, returning JWT token).
+        User Authentication: Implement POST /auth/register (user registration), POST /auth/login (user login, returning JWT token).(completed)
         Expense Management:
             GET /api/expenses (get all expenses for the authenticated user, with optional filtering/search).
             POST /api/expenses (add a new expense).
@@ -187,7 +194,7 @@ This section outlines the primary tasks for the Python/Flask backend:
         Crucially, implement Flask-CORS to allow requests from the frontend's origin (http://localhost:5173 during development) to prevent Cross-Origin Request Blocked errors.
     Receipt/Image Integration (Advanced):
         Implement file upload endpoint (POST /api/receipts/upload) to receive images.
-        Potentially integrate OCR (Optical Character Recognition) libraries (e.g., Tesseract via pytesseract) to extract text from receipts.
-        Store images securely (e.g., local filesystem, cloud storage).
+       
     Error Handling:
         Implement robust error handling and send meaningful error messages to the frontend.
+

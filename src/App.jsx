@@ -7,6 +7,7 @@
  */
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'; // No longer need 'Navigate' directly here
+import Navbar from './components/Layout/Navbar';
 
 // Our page components
 import LoginPage from './pages/Auth/LoginPage';
@@ -29,27 +30,31 @@ function App() {
   return (
     // Our main routing structure for the application.
     // We define which components render for which URL paths.
-    <Routes>
-      {/* Public Routes: These routes are accessible to all users,
-          even if they are not logged in. */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
 
-      {/* Protected Routes: All routes nested within this `Route` element
-          will be guarded by our `ProtectedRoute` component.
-          This means a user must be authenticated to access any of these paths. */}
-      <Route element={<ProtectedRoute />}>
-        {/* Our main dashboard page - now protected.
-            Users will be redirected to login if not authenticated. */}
-        <Route path="/" element={<DashboardPage />} />
-        {/* We will add more protected routes here later, such as
-            /expenses, /expenses/add, /expenses/edit/:id, /budgets, etc. */}
-      </Route>
+    <div className="App">
+      <Navbar/>
+      <Routes>
+        {/* Public Routes: These routes are accessible to all users,
+      even if they are not logged in. */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
-      {/* Catch-all Route: This route acts as a fallback.
-          If no other route matches the URL, our NotFoundPage will be displayed. */}
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        {/* Protected Routes: All routes nested within this `Route` element
+      will be guarded by our `ProtectedRoute` component.
+      This means a user must be authenticated to access any of these paths. */}
+        <Route element={<ProtectedRoute />}>
+          {/* Our main dashboard page - now protected.
+        Users will be redirected to login if not authenticated. */}
+          <Route path="/" element={<DashboardPage />} />
+          {/* We will add more protected routes here later, such as
+        /expenses, /expenses/add, /expenses/edit/:id, /budgets, etc. */}
+        </Route>
+
+        {/* Catch-all Route: This route acts as a fallback.
+      If no other route matches the URL, our NotFoundPage will be displayed. */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </div>
   );
 }
 

@@ -1,12 +1,17 @@
 // src/layouts/DashboardLayout.jsx
-
+/**
+ * @file DashboardLayout.jsx
+ * @description Defines our main application layout for authenticated users,
+ * including a header with navigation, user information, logout button, and content area.
+ */
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom'; // Outlet renders child routes, Link for navigation
+import { Outlet, NavLink } from 'react-router-dom'; 
 import { useAuth } from '../context/AuthContext'; // Our custom authentication hook
 
 /**
  * DashboardLayout Component
  * This component provides a consistent layout for all protected routes in our application.
+ * It includes a header with navigation links and a logout button.
  */
 const DashboardLayout = () => {
   // We use our authentication context to access the logout function and user information.
@@ -18,37 +23,50 @@ const DashboardLayout = () => {
       <header className="bg-secondary p-4 shadow-md border-b border-border-color">
         <nav className="container mx-auto flex justify-between items-center">
           {/* Our application logo/title */}
-          <Link to="/" className="text-2xl font-bold text-accent hover:text-accent-light transition-colors">
+          <NavLink to="/" className="text-2xl font-bold text-accent hover:text-accent-light transition-colors">
             Our Expense Tracker
-          </Link>
+          </NavLink>
 
           {/* Our main navigation links */}
           <ul className="flex space-x-6">
             <li>
-              <Link
+              {/* NavLink for Dashboard, applies active style if currently on this route */}
+              <NavLink
                 to="/"
-                className="text-text-primary hover:text-accent transition-colors text-lg font-medium"
+                className={({ isActive }) =>
+                  `text-text-primary hover:text-accent transition-colors text-lg font-medium ${
+                    isActive ? 'border-b-2 border-accent pb-1' : '' // Add a bottom border when active
+                  }`
+                }
               >
                 Dashboard
-              </Link>
+              </NavLink>
             </li>
             <li>
-              {/* Placeholder for Expenses link */}
-              <Link
-                to="/expenses" // We'll create this route later
-                className="text-text-primary hover:text-accent transition-colors text-lg font-medium"
+              {/* NavLink for Expenses, applies active style if currently on this route */}
+              <NavLink
+                to="/expenses"
+                className={({ isActive }) =>
+                  `text-text-primary hover:text-accent transition-colors text-lg font-medium ${
+                    isActive ? 'border-b-2 border-accent pb-1' : '' // Add a bottom border when active
+                  }`
+                }
               >
                 Expenses
-              </Link>
+              </NavLink>
             </li>
             <li>
-              {/* Placeholder for Budgets link */}
-              <Link
-                to="/budgets" // We'll create this route later
-                className="text-text-primary hover:text-accent transition-colors text-lg font-medium"
+              {/* NavLink for Budgets, applies active style if currently on this route */}
+              <NavLink
+                to="/budgets"
+                className={({ isActive }) =>
+                  `text-text-primary hover:text-accent transition-colors text-lg font-medium ${
+                    isActive ? 'border-b-2 border-accent pb-1' : '' // Add a bottom border when active
+                  }`
+                }
               >
                 Budgets
-              </Link>
+              </NavLink>
             </li>
           </ul>
 
@@ -56,7 +74,7 @@ const DashboardLayout = () => {
           <div className="flex items-center space-x-4">
             {user && (
               <span className="text-text-secondary text-lg">
-                Welcome, <span className="font-semibold text-accent">{user.username || 'User'}</span>!
+                Welcome, <span className="font-semibold text-accent">{user.email || "user"}</span>!
               </span>
             )}
             <button

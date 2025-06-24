@@ -3,7 +3,6 @@
  * @file App.jsx
  * @description Our main application component, handling global dark mode, routing,
  * and protected routes for secure access.
- * @date June 25, 2025
  */
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -13,6 +12,7 @@ import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ExpenseListPage from './pages/Expenses/ExpenseListPage'; 
 
 // Our custom components and layouts
 import ProtectedRoute from './components/ProtectedRoute'; // Importing our ProtectedRoute
@@ -47,8 +47,9 @@ function App() {
         <Route element={<DashboardLayout />}> {/* Nested DashboardLayout */}
           {/* Our main dashboard page - now protected and within the common layout */}
           <Route path="/" element={<DashboardPage />} />
-          {/* Future: We'll add more protected routes here later (e.g., /expenses, /budgets) */}
-          <Route path="/expenses" element={<div>Expenses List Page (Coming Soon)</div>} />
+          {/* NEW: Our Expense List Page route */}
+          <Route path="/expenses" element={<ExpenseListPage />} />
+          {/* Future: We'll add more protected routes here later (e.g., /expenses/add, /budgets) */}
           <Route path="/budgets" element={<div>Budgets Page (Coming Soon)</div>} />
         </Route>
       </Route>

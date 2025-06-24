@@ -78,8 +78,9 @@ const ExpenseListPage = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">{expense.date}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-text-primary">{expense.description}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">{expense.category}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-accent">${expense.amount.toFixed(2)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    {/* UPDATED: Changed currency symbol to Ksh */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-accent">Ksh {expense.amount.toFixed(2)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium"> {/* Removed duplicate amount display from here */}
                       <Link to={`/expenses/edit/${expense.id}`} className="text-info hover:text-info-light mr-4">
                         Edit
                       </Link>

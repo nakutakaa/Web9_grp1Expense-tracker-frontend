@@ -58,7 +58,7 @@ const BudgetPage = () => {
   };
 
   // Placeholder for actual spending data by category for the current month
-  // This would ideally come from  backends's expense aggregation API
+  // This would ideally come from backends's expense aggregation API
   const dummyActualSpending = {
     1: 1200, // Food
     2: 250,  // Transport
@@ -98,7 +98,8 @@ const BudgetPage = () => {
               {category.name}:
             </label>
             <div className="flex items-center w-2/3">
-              <span className="text-lg text-text-secondary mr-2">$</span>
+              {/* UPDATED: Currency prefix for input */}
+              <span className="text-lg text-text-secondary mr-2">Ksh </span>
               <input
                 type="number"
                 id={`budget-${category.id}`}
@@ -140,8 +141,9 @@ const BudgetPage = () => {
                   <div key={category.id} className="border-b border-border-color pb-4 last:border-b-0 last:pb-0">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-lg text-text-primary font-semibold">{category.name}</span>
+                      {/* UPDATED: Currency display for actual vs budgeted */}
                       <span className="text-md text-text-secondary">
-                        ${actualSpent.toFixed(2)} / ${budgetedAmount.toFixed(2)}
+                        Ksh {actualSpent.toFixed(2)} / Ksh {budgetedAmount.toFixed(2)}
                       </span>
                     </div>
                     <div className="w-full bg-primary-light rounded-full h-2.5">
@@ -150,10 +152,11 @@ const BudgetPage = () => {
                         style={{ width: `${Math.min(percentageSpent, 100)}%` }}
                       ></div>
                     </div>
+                    {/* UPDATED: Currency display for remaining/over budget */}
                     <p className={`text-sm mt-1 ${isOverBudget ? 'text-error' : 'text-text-tertiary'}`}>
                       {isOverBudget ?
-                        `Over budget by $${Math.abs(remaining).toFixed(2)}` :
-                        `$${remaining.toFixed(2)} remaining`
+                        `Over budget by Ksh ${Math.abs(remaining).toFixed(2)}` :
+                        `Ksh ${remaining.toFixed(2)} remaining`
                       }
                     </p>
                   </div>
@@ -162,7 +165,7 @@ const BudgetPage = () => {
           </div>
         )}
         <p className="text-sm text-text-tertiary mt-4">
-          Future: Actual spending will be pulled from your recorded expenses.
+          Future: Actual spending will be pulled from our recorded expenses.
         </p>
       </div>
     </div>

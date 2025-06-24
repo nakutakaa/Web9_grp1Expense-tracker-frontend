@@ -43,10 +43,9 @@ Follow these steps to set up and run the frontend application locally.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <YOUR_REPO_URL>
+    git clone <REPO_URL>
     cd expense-tracker-frontend
     ```
-    (Replace `<YOUR_REPO_URL>` with the actual URL of your Git repository).
 
 2.  **Install dependencies:**
     ```bash

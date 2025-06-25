@@ -1,0 +1,87 @@
+/* income.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .IncomePage {
+    padding: 30px;
+    text-align: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #a8edea, #fed6e3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .IncomePage h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .income-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 300px;
+  }
+  
+  .income-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .income-form button {
+    padding: 12px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .income-form button:hover {
+    background-color: #1e7e34;
+    transform: scale(1.05);
+  }
+  
+  .income-list {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .income-list h2 {
+    margin-bottom: 15px;
+    color: #555;
+  }
+  
+  .income-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .income-list li {
+    text-align: left;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .income-list li:last-child {
+    border-bottom: none;
+  }
+  
+  @media (max-width: 600px) {
+    .income-form, .income-list {
+      width: 90%;
+    }
+  }
